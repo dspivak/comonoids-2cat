@@ -521,17 +521,20 @@ the horizontal composite of vertical composites is $f_2(\varphi_1*\varphi_1')*\v
 \end{proof}
 
 \begin{theorem}\label{thm.main}
-In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids, monoid homomorphisms, and intertwiners \eqref{eqn.inter_monoid} forms a 2-category.
+In any monoidal category $(\cat{C},I,\otimes)$, monoids, monoid homomorphisms, and intertwiners \eqref{eqn.inter_monoid} together form a 2-category $\Cat{Mon}(\cat{C})$. A lax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a strict 2-functor $\Cat{Mon}(F)\colon\Cat{Mon}(\cat{C})\to\Cat{Mon}(\cat{D})$.
 \end{theorem}
 \begin{proof}
-This will follow from \cref{lemma.ver_comp,lemma.hor_comp,lemma.hor_comp_functor}, once we show that horizontal composition is unital and associative. For unitality we have $f(\eta)*\varphi=\varphi$ and $\id(\varphi)*\eta=\varphi$. For associativity, we have $f_3(f_2(\varphi_1)*\varphi_2)*\varphi_3=f_3(f_2(\varphi_1))*f_3(\varphi_2)*\varphi_3$.
+The first claim will follow from \cref{lemma.ver_comp,lemma.hor_comp,lemma.hor_comp_functor}, once we show that horizontal composition is unital and associative. For unitality we have $f(\eta)*\varphi=\varphi$ and $\id(\varphi)*\eta=\varphi$. For associativity, we have $f_3(f_2(\varphi_1)*\varphi_2)*\varphi_3=f_3(f_2(\varphi_1))*f_3(\varphi_2)*\varphi_3$.
+
+The second claim follows easily from the fact that lax monoidal functors preserve monoids and their homomorphisms, and that if $f*\varphi=\varphi*f'$ then $F(f)*F(\varphi)=F(\varphi)*F(f')$.
 \end{proof}
 
 Taking opposites, we also have the following.
 
 \begin{corollary}\label{cor.main}
-In any monoidal category $(\cat{C},I,\otimes)$, the category of comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} forms a 2-category.
+In any monoidal category $(\cat{C},I,\otimes)$, comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} together form a 2-category $\Cat{Comon}(\cat{C})$. A colax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a 2-functor $\Cat{Comon}(F)\colon\Cat{Comon}(\cat{C})\to\Cat{Comon}(\cat{D})$.
 \end{corollary}
+
 
 \section*{Acknowledgments}
 This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-23-1-0376.
