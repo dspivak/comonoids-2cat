@@ -2,7 +2,7 @@
 
 
 \settrims{0pt}{0pt} % page and stock same size
-\settypeblocksize{*}{35pc}{*} % {height}{width}{ratio}
+\settypeblocksize{*}{34.5pc}{*} % {height}{width}{ratio}
 \setlrmargins{*}{*}{1} % {spine}{edge}{ratio}
 \setulmarginsandblock{.98in}{.98in}{*} % height of typeblock computed
 \setheadfoot{\onelineskip}{2\onelineskip} % {headheight}{footskip}
@@ -411,13 +411,14 @@ replacement=\&]{}\ar[r,tick, "{#1}"]\&{}\end{tikzcd}}
 
 \author{David I. Spivak}
 
+\date{\vspace{-10pt}}
 %\date{Last updated: \today}
 
 \maketitle
 
-\begin{abstract}
-In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids---and likewise the category of comonoids---in fact carries the structure of a 2-category. Given two monoid homomorphisms $f,f'\colon M_1\to M_2$, a 2-morphism between them, which we call an \emph{intertwiner}, is a map $\varphi\colon I\to M_2$ from the monoidal identity into the codomain that intertwines with the multiplication: $f*\varphi=\varphi*f'$; for comonoids it's a map from the domain to the monoidal identity that intertwines similarly with the comultiplication. In this short note, we will explain vertical and horizontal composition, prove the required coherence, and give a few examples.
-\end{abstract}
+%\begin{abstract}
+%In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids---and likewise the category of comonoids---in fact carries the structure of a 2-category. Given two monoid homomorphisms $f,f'\colon M_1\to M_2$, a 2-morphism between them, which we call an \emph{intertwiner}, is a map $\varphi\colon I\to M_2$ from the monoidal identity into the codomain that intertwines with the multiplication: $f*\varphi=\varphi*f'$; for comonoids it's a map from the domain to the monoidal identity that intertwines similarly with the comultiplication. In this short note, we will explain vertical and horizontal composition, prove the required coherence, and give a few examples.
+%\end{abstract}
 
 In this short note, we define a 2-category structure on the category of (co)monoids in any monoidal category. The objects and morphisms are (co)monoids and their homomorphisms, and we will call the 2-morphisms \emph{intertwiners}.
 
@@ -534,6 +535,10 @@ Taking opposites, we also have the following.
 \begin{corollary}\label{cor.main}
 In any monoidal category $(\cat{C},I,\otimes)$, comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} together form a 2-category $\Cat{Comon}(\cat{C})$. A colax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a 2-functor $\Cat{Comon}(F)\colon\Cat{Comon}(\cat{C})\to\Cat{Comon}(\cat{D})$.
 \end{corollary}
+
+\begin{example}
+There is a colax monoidal functor $(\poly,\yon,\tri)\to(\Cat{Rel},1,\times)$ sending $E\to B$ to $E$. This induces a 2-functor $\catsharp=\Cat{Comon}(\poly)\to\Cat{Comon}(\Cat{Rel})$; it sends a category $\cat{C}$ to its set $M=\Mor(\cat{C})$ of morphisms, with counit given by the subset of identity morphisms, and with comultiplication given by tuples $(f,g,h)$ with $f=g\then h$.
+\end{example}
 
 
 \section*{Acknowledgments}
