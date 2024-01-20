@@ -2,7 +2,7 @@
 
 
 \settrims{0pt}{0pt} % page and stock same size
-\settypeblocksize{*}{36.5pc}{*} % {height}{width}{ratio}
+\settypeblocksize{*}{35pc}{*} % {height}{width}{ratio}
 \setlrmargins{*}{*}{1} % {spine}{edge}{ratio}
 \setulmarginsandblock{.98in}{.98in}{*} % height of typeblock computed
 \setheadfoot{\onelineskip}{2\onelineskip} % {headheight}{footskip}
@@ -416,7 +416,7 @@ replacement=\&]{}\ar[r,tick, "{#1}"]\&{}\end{tikzcd}}
 \maketitle
 
 \begin{abstract}
-In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids---and likewise the category of comonoids---in fact carries the structure of a 2-category. Given two monoid homomorphisms $f,f'\colon M_1\to M_2$, a 2-morphism between them, which we call an \emph{intertwiner}, is a map $\varphi\colon I\to M_2$ from the monoidal identity into the codomain that intertwines with the multiplication: $f(m_1)*\varphi=\varphi*f'(m_1)$; for comonoids it's a map from the domain to the monoidal identity that intertwines with the comultiplication. In this short note, we will explain vertical and horizontal composition, prove the required coherence, and give a few examples.
+In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids---and likewise the category of comonoids---in fact carries the structure of a 2-category. Given two monoid homomorphisms $f,f'\colon M_1\to M_2$, a 2-morphism between them, which we call an \emph{intertwiner}, is a map $\varphi\colon I\to M_2$ from the monoidal identity into the codomain that intertwines with the multiplication: $f*\varphi=\varphi*f'$; for comonoids it's a map from the domain to the monoidal identity that intertwines similarly with the comultiplication. In this short note, we will explain vertical and horizontal composition, prove the required coherence, and give a few examples.
 \end{abstract}
 
 In this short note, we define a 2-category structure on the category of (co)monoids in any monoidal category. The objects and morphisms are (co)monoids and their homomorphisms, and we will call the 2-morphisms \emph{intertwiners}.
@@ -425,33 +425,33 @@ For example, in the category $(\smset,1,\times)$ of sets under cartesian product
 \[
 f(m_1)*m_2=m_2*f'(m_1).
 \]
-If $M_1=M=M_2$ then monoid of maps from the identity to itself is the center of $M$. As another example, any set forms a comonoid in the monoidal 1-category $(\Cat{Rel},1,\times)$, and the comonoid maps from $C_1$ to $C_2$ are exactly the functions. An intertwiner between functions $f,f'\colon C_1\to C_2$ consists of a subset $S\ss C_1$ such that the composites $S\to C_1\tto C_2$ agree. As a final example, in the (nonsymmetric) monoidal category $(\poly,\yon,\tri)$ of polynomial functors under substitution, comonoids are exactly categories \cite{ahman2016directed} and their homomorphisms are cofunctors \cite{aguiar1997internal}. An intertwiner between them is precisely a natural cotransformation \cite{clarke2022introduction}.
+If $M_1=M=M_2$ then monoid of maps from the identity to itself is the center of $M$. As another example, any set forms a comonoid in the monoidal 1-category $(\Cat{Rel},1,\times)$, and the comonoid maps from $C_1$ to $C_2$ are exactly the functions. An intertwiner between functions $f,f'\colon C_1\to C_2$ consists of a subset $S\ss C_1$ such that the composites $S\to C_1\tto C_2$ agree. As a final example, in the (nonsymmetric) monoidal category $(\poly,\yon,\tri)$ of polynomial functors under substitution, comonoids are precisely categories \cite{ahman2016directed} and their homomorphisms are cofunctors \cite{aguiar1997internal}. An intertwiner between them is precisely a natural cotransformation \cite{clarke2022introduction}.
 
-The definition of 2-morphism is quite simple.
+The definition of the 2-categorical structure on the category of monoids in $(\cat{C},I,\otimes)$ is quite simple.
 \begin{definition}
 Let $f,f'\colon X_1\to X_2$ be monoid morphisms. An \emph{intertwiner} $f\imp f'$ between them is a map $\varphi\colon I\to X_2$ such that  $f*\varphi=\varphi*f'$, i.e. such that the following diagram commutes
-\[
+\begin{equation}\label{eqn.inter_monoid}
 \begin{tikzcd}
 	X_1\ar[r, "f\otimes \varphi"]\ar[d, "\varphi\otimes f'"']&
 	X_2\otimes X_2\ar[d, "\mu"]\\
 	X_2\otimes X_2\ar[r, "\mu"']&
 	X_2
 \end{tikzcd}
-\]
+\end{equation}
 where we elide the isomorphisms $I\otimes X_1\cong X_1\cong X_1\otimes I$.
 \end{definition}
 
 If $f,f'$ are comonoid homomorphisms, an intertwiner $f\imp f'$ is a map $X_1\to I$ such that the righthand diagram commutes:
-\[
+\begin{equation}\label{eqn.inter_comonoid}
 \begin{tikzcd}
 	X_1\ar[r, "\delta"]\ar[d, "\delta"']&
 	X_1\otimes X_1\ar[d, "f\otimes\varphi"]\\
 	X_1\otimes X_1\ar[r, "\varphi\otimes f'"']&
 	X_2
 \end{tikzcd}
-\]
+\end{equation}
 
-To prove that the above do in fact form the 2-morphisms of a 2-category, we need to explain how they compose vertically and horizontally, and we need to prove various coherences. It suffices to do this in the case of monoids, since everything for comonoids is simply opposite.
+To prove that the above do in fact form the 2-morphisms of a 2-category, we need to explain how they compose vertically and horizontally, and we need to prove various coherences. It suffices to do this in the case of monoids, since everything for comonoids is simply opposite; see \cref{thm.main,cor.main}.
 
 The identity intertwiner on any $f$ is the monoidal unit $\eta\colon I\to X_2$; this satisfies \eqref{eqn.def_vert} because $\mu(f\otimes\eta)=f=\mu(\eta\otimes f)$. The vertical composite $\varphi\then\varphi'$ of intertwiners shown left will be the map $\varphi*\varphi'\colon I\to X_2$ as shown right:
 \begin{equation}\label{eqn.def_vert}
@@ -465,16 +465,16 @@ The identity intertwiner on any $f$ is the monoidal unit $\eta\colon I\to X_2$; 
 	I\cong I\otimes I\To{\varphi\otimes\varphi'}X_2\otimes X_2\To{\mu}X_2
 \end{equation}
 
-\begin{lemma}
+\begin{lemma}\label{lemma.ver_comp}
 The notion of vertical composite from \eqref{eqn.def_vert} is an intertwiner $f\imp f''$; moreover, the monoid homomorphisms $X_1\to X_2$ and intertwiners between them form a category.
 \end{lemma}
 \begin{proof}
 It is an intertwiner because $f*\varphi*\varphi'=\varphi*f'*\varphi'=\varphi*\varphi'*f''$. Clearly $\eta*\varphi=\varphi=\varphi*\eta$, so $\eta$ is a unit, and associativity for intertwiners follows from associativity for multiplication in $X_2$.
 \end{proof}
 
-The horizontal composite $\varphi_1\then\varphi_2$ of intertwiners shown left will be the map $(\varphi_1\then f_2)*\varphi_2\colon I\to X_2$ as shown right
+The horizontal composite $\varphi_1\then\varphi_2$ of intertwiners as shown left will be the map $(\varphi_1\then f_2)*\varphi_2\colon I\to X_2$ as shown right
 \begin{equation}\label{eqn.def_hor}
-\begin{tikzcd}[column sep=50pt]
+\begin{tikzcd}[column sep=45pt]
 	X_0\ar[r, bend left=25pt, "f_1", ""' name=a1]\ar[r, bend right=25pt, "f_1'"', "" name=b1]&
 	X_1\ar[r, bend left=25pt, "f_2", ""' name=a2]\ar[r, bend right=25pt, "f_2'"', "" name=b2]&
 	X_2
@@ -486,7 +486,7 @@ I\To{\varphi_1}X_1\To{f_2\otimes\varphi_2}X_2\otimes X_2\To{\mu}X_2
 \end{equation}
 Note that $(\varphi_1\then f_2)*\varphi_2=\varphi_2*(\varphi_1\then f_2')$. One may instead wish to denote it $f_2(\varphi_1)*\varphi_2$. 
 
-\begin{lemma}
+\begin{lemma}\label{lemma.hor_comp}
 The notion of horizontal composite from \eqref{eqn.def_hor} is an intertwiner $(f_1\then f_2)\imp (f_1'\then f_2')$.
 \end{lemma}
 \begin{proof}
@@ -501,12 +501,37 @@ The result follows from the following chain of equalities:
 where the first and last are because $f_2$ and $f_2'$ are monoid homomorphisms, and the middle two are because $\varphi_1$ and $\varphi_2$ are intertwiners.
 \end{proof}
 
-\begin{lemma}
-Horizontal composition is a functor: it satisfies interchange and the composite of identities is an identity.
+\begin{lemma}\label{lemma.hor_comp_functor}
+Horizontal composition is a functor: it satisfies interchange, and the horizontal composite of identities is an identity.
 \end{lemma}
 \begin{proof}
-
+The composite of identities is $f_2(\eta)*\eta=\eta$, the identity. Given a diagram
+\[
+\begin{tikzcd}[column sep=60pt]
+	X_0\ar[r, bend left=50pt, "f_1", ""' name=a1]\ar[r, "f_1'" description, "" name=b11, ""' name=b12]\ar[r, bend right=50pt, "f''"', "" name=c1]&
+	X_1\ar[r, bend left=50pt, "f_2", ""' name=a2]\ar[r, "f_2'" description, "" name=b21, ""' name=b22]\ar[r, bend right=50pt, "f''"', "" name=c2]&
+	X_2
+	\ar[from=a1, to=b11, Rightarrow, "\varphi_1"]
+	\ar[from=b12, to=c1, Rightarrow, "\varphi_1'"]
+	\ar[from=a2, to=b21, Rightarrow, "\varphi_2"]
+	\ar[from=b22, to=c2, Rightarrow, "\varphi_2'"]
+\end{tikzcd}
+\]
+the horizontal composite of vertical composites is $f_2(\varphi_1*\varphi_1')*\varphi_2*\varphi_2'$ and the vertical composite of horizontal composites is $f_2(\varphi_1)*\varphi_2*f_2'(\varphi_1')*\varphi_2'$; these are equal because $f_2$ is a homomorphism and $f_2(\varphi_1')*\varphi_2=\varphi_2*f_2'(\varphi_1')$.
 \end{proof}
+
+\begin{theorem}\label{thm.main}
+In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids, monoid homomorphisms, and intertwiners \eqref{eqn.inter_monoid} forms a 2-category.
+\end{theorem}
+\begin{proof}
+This will follow from \cref{lemma.ver_comp,lemma.hor_comp,lemma.hor_comp_functor}, once we show that horizontal composition is unital and associative. For unitality we have $f(\eta)*\varphi=\varphi$ and $\id(\varphi)*\eta=\varphi$. For associativity, we have $f_3(f_2(\varphi_1)*\varphi_2)*\varphi_3=f_3(f_2(\varphi_1))*f_3(\varphi_2)*\varphi_3$.
+\end{proof}
+
+Taking opposites, we also have the following.
+
+\begin{corollary}\label{cor.main}
+In any monoidal category $(\cat{C},I,\otimes)$, the category of comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} forms a 2-category.
+\end{corollary}
 
 \section*{Acknowledgments}
 This material is based upon work supported by the Air Force Office of Scientific Research under award number FA9550-23-1-0376.
