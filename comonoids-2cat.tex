@@ -395,7 +395,7 @@ replacement=\&]{}\ar[r,tick, "{#1}"]\&{}\end{tikzcd}}
 
 % ---- Changeable document parameters ---- %
 
-\linespread{1.1}
+\linespread{1.08}
 \allowdisplaybreaks
 \setsecnumdepth{section}
 \settocdepth{section}
@@ -411,7 +411,7 @@ replacement=\&]{}\ar[r,tick, "{#1}"]\&{}\end{tikzcd}}
 
 \author{David I. Spivak}
 
-\date{\vspace{-10pt}}
+\date{\vspace{-5pt}}
 %\date{Last updated: \today}
 
 \maketitle
@@ -420,15 +420,15 @@ replacement=\&]{}\ar[r,tick, "{#1}"]\&{}\end{tikzcd}}
 %In any monoidal category $(\cat{C},I,\otimes)$, the category of monoids---and likewise the category of comonoids---in fact carries the structure of a 2-category. Given two monoid homomorphisms $f,f'\colon M_1\to M_2$, a 2-morphism between them, which we call an \emph{intertwiner}, is a map $\varphi\colon I\to M_2$ from the monoidal identity into the codomain that intertwines with the multiplication: $f*\varphi=\varphi*f'$; for comonoids it's a map from the domain to the monoidal identity that intertwines similarly with the comultiplication. In this short note, we will explain vertical and horizontal composition, prove the required coherence, and give a few examples.
 %\end{abstract}
 
-In this short note, we define a 2-category structure on the category of (co)monoids in any monoidal category. The objects and morphisms are (co)monoids and their homomorphisms, and we will call the 2-morphisms \emph{intertwiners}.
+In this short note, we define a 2-category structure on the category of (co)monoids in any monoidal category $(\cat{C},I,\otimes)$. The objects and morphisms are (co)monoids and their homomorphisms, and we will call the 2-morphisms \emph{intertwiners}.
 
 For example, in the category $(\smset,1,\times)$ of sets under cartesian product, an intertwiner between monoid homomorphisms $f,f'\colon M_1\to M_2$ is an element $m_2\in M_2$ such that for all $m_1\in M_1$, the following holds in $M_2$:
 \[
 f(m_1)*m_2=m_2*f'(m_1).
 \]
-If $M_1=M=M_2$ then monoid of maps from the identity to itself is the center of $M$. As another example, any set forms a comonoid in the monoidal 1-category $(\Cat{Rel},1,\times)$, and the comonoid maps from $C_1$ to $C_2$ are exactly the functions. An intertwiner between functions $f,f'\colon C_1\to C_2$ consists of a subset $S\ss C_1$ such that the composites $S\to C_1\tto C_2$ agree. As a final example, in the (nonsymmetric) monoidal category $(\poly,\yon,\tri)$ of polynomial functors under substitution, comonoids are precisely categories \cite{ahman2016directed} and their homomorphisms are cofunctors \cite{aguiar1997internal}. An intertwiner between them is precisely a natural cotransformation \cite{clarke2022introduction}.
+If $M_1=M=M_2$ then the monoid of intertwiners from the identity to itself is the center of $M$. As another example, any set forms a comonoid in the monoidal 1-category $(\Cat{Rel},1,\times)$, and the comonoid maps from $C_1$ to $C_2$ are exactly the functions. An intertwiner between functions $f,f'\colon C_1\to C_2$ consists of a subset $S\ss C_1$ such that the composites $S\to C_1\tto C_2$ agree. As a final example, in the (nonsymmetric) monoidal category $(\poly,\yon,\tri)$ of polynomial functors under substitution, comonoids are precisely categories \cite{ahman2016directed} and their homomorphisms are cofunctors \cite{aguiar1997internal}. An intertwiner between cofunctors is precisely a natural cotransformation \cite{clarke2022introduction}.
 
-The definition of the 2-categorical structure on the category of monoids in $(\cat{C},I,\otimes)$ is quite simple.
+The definition of the 2-categorical structure on the category of monoids in $(\cat{C},I,\otimes)$ is quite simple. For any monoid, we denote the unit by $\eta$ and multiplication by $\mu$.
 \begin{definition}
 Let $f,f'\colon X_1\to X_2$ be monoid morphisms. An \emph{intertwiner} $f\imp f'$ between them is a map $\varphi\colon I\to X_2$ such that  $f*\varphi=\varphi*f'$, i.e. such that the following diagram commutes
 \begin{equation}\label{eqn.inter_monoid}
@@ -442,7 +442,7 @@ Let $f,f'\colon X_1\to X_2$ be monoid morphisms. An \emph{intertwiner} $f\imp f'
 where we elide the isomorphisms $I\otimes X_1\cong X_1\cong X_1\otimes I$.
 \end{definition}
 
-If $f,f'$ are comonoid homomorphisms, an intertwiner $f\imp f'$ is a map $X_1\to I$ such that the righthand diagram commutes:
+If instead $f,f'\colon X_1\to X_2$ are comonoid homomorphisms, an intertwiner $f\imp f'$ is a map $X_1\to I$ such that the following diagram commutes:
 \begin{equation}\label{eqn.inter_comonoid}
 \begin{tikzcd}
 	X_1\ar[r, "\delta"]\ar[d, "\delta"']&
@@ -452,9 +452,9 @@ If $f,f'$ are comonoid homomorphisms, an intertwiner $f\imp f'$ is a map $X_1\to
 \end{tikzcd}
 \end{equation}
 
-To prove that the above do in fact form the 2-morphisms of a 2-category, we need to explain how they compose vertically and horizontally, and we need to prove various coherences. It suffices to do this in the case of monoids, since everything for comonoids is simply opposite; see \cref{thm.main,cor.main}.
+To prove that intertwiners do in fact form the 2-morphisms of a 2-category, we need to explain how they compose vertically and horizontally, as well as prove various coherences. It suffices to do this in the case of monoids, since everything for comonoids is simply opposite.
 
-The identity intertwiner on any $f$ is the monoidal unit $\eta\colon I\to X_2$; this satisfies \eqref{eqn.def_vert} because $\mu(f\otimes\eta)=f=\mu(\eta\otimes f)$. The vertical composite $\varphi\then\varphi'$ of intertwiners shown left will be the map $\varphi*\varphi'\colon I\to X_2$ as shown right:
+The identity intertwiner on any $f\colon X_1\to X_2$ is the monoidal unit $\eta\colon I\to X_2$; this satisfies \eqref{eqn.inter_monoid} because $\mu(f\otimes\eta)=f=\mu(\eta\otimes f)$. The vertical composite $\varphi\then\varphi'$ of intertwiners shown left will be the map $\varphi*\varphi'\colon I\to X_2$ as shown right:
 \begin{equation}\label{eqn.def_vert}
 \begin{tikzcd}[column sep=60pt]
 	X_1\ar[r, bend left=50pt, "f", ""' name=a]\ar[r, "f'" description, "" name=b1, ""' name=b2]\ar[r, bend right=50pt, "f''"', "" name=c]&
@@ -470,10 +470,10 @@ The identity intertwiner on any $f$ is the monoidal unit $\eta\colon I\to X_2$; 
 The notion of vertical composite from \eqref{eqn.def_vert} is an intertwiner $f\imp f''$; moreover, the monoid homomorphisms $X_1\to X_2$ and intertwiners between them form a category.
 \end{lemma}
 \begin{proof}
-It is an intertwiner because $f*\varphi*\varphi'=\varphi*f'*\varphi'=\varphi*\varphi'*f''$. Clearly $\eta*\varphi=\varphi=\varphi*\eta$, so $\eta$ is a unit, and associativity for intertwiners follows from associativity for multiplication in $X_2$.
+It is an intertwiner because $f*\varphi*\varphi'=\varphi*f'*\varphi'=\varphi*\varphi'*f''$. Clearly $\eta*\varphi=\varphi=\varphi*\eta$, so $\eta$ is unital, and associativity for intertwiners follows from associativity for multiplication in $X_2$.
 \end{proof}
 
-The horizontal composite $\varphi_1\then\varphi_2$ of intertwiners as shown left will be the map $(\varphi_1\then f_2)*\varphi_2\colon I\to X_2$ as shown right
+The horizontal composite $\varphi_1\then_{X_1}\varphi_2$ of intertwiners as shown left will be the map $(\varphi_1\then f_2)*\varphi_2\colon I\to X_2$ as shown right
 \begin{equation}\label{eqn.def_hor}
 \begin{tikzcd}[column sep=45pt]
 	X_0\ar[r, bend left=25pt, "f_1", ""' name=a1]\ar[r, bend right=25pt, "f_1'"', "" name=b1]&
@@ -522,7 +522,7 @@ the horizontal composite of vertical composites is $f_2(\varphi_1*\varphi_1')*\v
 \end{proof}
 
 \begin{theorem}\label{thm.main}
-In any monoidal category $(\cat{C},I,\otimes)$, monoids, monoid homomorphisms, and intertwiners \eqref{eqn.inter_monoid} together form a 2-category $\Cat{Mon}(\cat{C})$. A lax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a strict 2-functor $\Cat{Mon}(F)\colon\Cat{Mon}(\cat{C})\to\Cat{Mon}(\cat{D})$.
+In any monoidal category $(\cat{C},I,\otimes)$, the monoids, monoid homomorphisms, and intertwiners \eqref{eqn.inter_monoid} together form a 2-category $\Cat{Mon}(\cat{C})$. A lax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a strict 2-functor $\Cat{Mon}(F)\colon\Cat{Mon}(\cat{C})\to\Cat{Mon}(\cat{D})$.
 \end{theorem}
 \begin{proof}
 The first claim will follow from \cref{lemma.ver_comp,lemma.hor_comp,lemma.hor_comp_functor}, once we show that horizontal composition is unital and associative. For unitality we have $f(\eta)*\varphi=\varphi$ and $\id(\varphi)*\eta=\varphi$. For associativity, we have $f_3(f_2(\varphi_1)*\varphi_2)*\varphi_3=f_3(f_2(\varphi_1))*f_3(\varphi_2)*\varphi_3$.
@@ -533,11 +533,11 @@ The second claim follows easily from the fact that lax monoidal functors preserv
 Taking opposites, we also have the following.
 
 \begin{corollary}\label{cor.main}
-In any monoidal category $(\cat{C},I,\otimes)$, comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} together form a 2-category $\Cat{Comon}(\cat{C})$. A colax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a 2-functor $\Cat{Comon}(F)\colon\Cat{Comon}(\cat{C})\to\Cat{Comon}(\cat{D})$.
+In any monoidal category $(\cat{C},I,\otimes)$, the comonoids, comonoid homomorphisms, and intertwiners \eqref{eqn.inter_comonoid} together form a 2-category $\Cat{Comon}(\cat{C})$. A colax monoidal functor $F\colon\cat{C}\to\cat{D}$ induces a strict 2-functor $\Cat{Comon}(F)\colon\Cat{Comon}(\cat{C})\to\Cat{Comon}(\cat{D})$.
 \end{corollary}
 
 \begin{example}
-There is a colax monoidal functor $(\poly,\yon,\tri)\to(\Cat{Rel},1,\times)$ sending $E\to B$ to $E$. This induces a 2-functor $\catsharp=\Cat{Comon}(\poly)\to\Cat{Comon}(\Cat{Rel})$; it sends a category $\cat{C}$ to its set $M=\Mor(\cat{C})$ of morphisms, with counit given by the subset of identity morphisms, and with comultiplication given by tuples $(f,g,h)$ with $f=g\then h$.
+There is a colax monoidal functor $(\poly,\yon,\tri)\to(\Cat{Rel},1,\times)$ sending $E\to B$ to $E$. This induces a 2-functor $\catsharp=\Cat{Comon}(\poly)\to\Cat{Comon}(\Cat{Rel})$; it sends a category $\cat{C}$ to its set $\Mor(\cat{C})$ of morphisms, with counit given by the subset of identity morphisms, and with comultiplication given by tuples $(f,g,h)$ with $f=g\then h$, as seen in \cite{pare2013comonoids}.
 \end{example}
 
 
